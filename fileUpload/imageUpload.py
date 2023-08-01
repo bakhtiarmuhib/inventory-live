@@ -6,8 +6,7 @@ import uuid
 import os
 from strawberry.types import Info
 from bson.objectid import ObjectId
-from dotenv import load_dotenv
-load_dotenv()
+
 
 
 from jwtAuthentication.jwtOuth2 import  get_current_user_info,dencrypt_data
@@ -23,7 +22,7 @@ async def organizationLogoUpload(file : Upload, info: Info) -> JSON:
     dencrypt_data_in_list = decoded_user_data.split(",")
 
     extension = file.filename.split(".")
-    print(extension)
+    
     if extension[1] not in ['png','jpg',"jpeg"]:
         raise Exception("Image format not supported")
     
@@ -31,7 +30,7 @@ async def organizationLogoUpload(file : Upload, info: Info) -> JSON:
     contents = await file.read()
 
 
-    print(type(os.getenv("weblink")))    
+     
     #save the file
     with open(f"{IMAGEDIR}{file.filename}", "wb") as f:
         f.write(contents)
@@ -39,7 +38,7 @@ async def organizationLogoUpload(file : Upload, info: Info) -> JSON:
     
     
     get_user = { "_id": ObjectId(dencrypt_data_in_list[0])}
-    newvalues = { "$set": {"organization_logo" : (os.getenv("weblink")+IMAGEDIR+"/"+file.filename)}}
+    newvalues = { "$set": {"organization_logo" : "inventory-live-8o8d-7c8ubrsv8-bakhtiarmuhib.vercel.app"+IMAGEDIR+"/"+file.filename)}}
 
     await organization_collection.update_one(get_user, newvalues)
 
@@ -77,7 +76,7 @@ async def organizationTradeLicenseImageUpload(file : Upload, info: Info) -> JSON
     
     
     get_user = { "_id": ObjectId(dencrypt_data_in_list[0])}
-    newvalues = { "$set": {"trade_lcense_image" : (os.getenv("weblink")+IMAGEDIR+"/"+file.filename)}}
+    newvalues = { "$set": {"trade_lcense_image" : "inventory-live-8o8d-7c8ubrsv8-bakhtiarmuhib.vercel.app"+IMAGEDIR+"/"+file.filename)}}
 
     await organization_collection.update_one(get_user, newvalues)
 
@@ -115,7 +114,7 @@ async def userNidImageUpload(file : Upload, info: Info) -> JSON:
     
     
     get_user = { "_id": ObjectId(dencrypt_data_in_list[0])}
-    newvalues = { "$set": {"nid_image" : (os.getenv("weblink")+IMAGEDIR+"/"+file.filename)}}
+    newvalues = { "$set": {"nid_image" : "inventory-live-8o8d-7c8ubrsv8-bakhtiarmuhib.vercel.app"+IMAGEDIR+"/"+file.filename)}}
 
     await user_collection.update_one(get_user, newvalues)
 
@@ -153,7 +152,7 @@ async def userProfileImageUpload(file : Upload, info: Info) -> JSON:
     
     
     get_user = { "_id": ObjectId(dencrypt_data_in_list[0])}
-    newvalues = { "$set": {"profile_image" : (os.getenv("weblink")+IMAGEDIR+"/"+file.filename)}}
+    newvalues = { "$set": {"profile_image" : "inventory-live-8o8d-7c8ubrsv8-bakhtiarmuhib.vercel.app"+IMAGEDIR+"/"+file.filename)}}
 
     await user_collection.update_one(get_user, newvalues)
 
