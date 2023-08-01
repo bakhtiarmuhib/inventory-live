@@ -5,7 +5,7 @@ from strawberry.fastapi import GraphQLRouter
 from mutations.combineMutaion import mutations
 from queries.combineQuerie import queries
 from fastapi.staticfiles import StaticFiles
-import uvicorn
+
 
 
 # create mutation types
@@ -30,5 +30,3 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(graphql_app, prefix="/graphql")
 
 
-if __name__ == "__main__":
-  uvicorn.run("server.api:app", host="0.0.0.0", port=8000, reload=True)
